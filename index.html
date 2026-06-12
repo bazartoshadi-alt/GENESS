@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hirova Talent Intelligence OS</title>
+  <meta name="description" content="Hirova is a public-ready recruitment platform with smart applicant guidance and owner-side candidate intelligence." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <section class="public-shell" id="publicShell">
+    <header class="public-nav">
+      <div class="brand-block public-brand">
+        <div class="brand-mark" aria-hidden="true">H</div>
+        <div>
+          <strong>Hirova</strong>
+          <span>Smart Recruitment Platform</span>
+        </div>
+      </div>
+      <nav class="public-links" aria-label="روابط عامة">
+        <a href="#publicJobsSection">الشواغر</a>
+        <a href="#publicHowItWorks">طريقة التقديم</a>
+        <button class="btn ghost" data-open="loginModal">دخول الإدارة</button>
+      </nav>
+    </header>
+
+    <main class="public-main">
+      <section class="public-hero reveal">
+        <div class="public-hero-copy">
+          <span class="chip">Hirova Careers Portal</span>
+          <h1>بوابة توظيف ذكية، واضحة، وجاهزة لاستقبال المتقدمين.</h1>
+          <p>استعرض الشواغر المتاحة، اختر الوظيفة الأنسب، وقدّم طلبك بسهولة. مساعد Hirova الذكي أسفل الصفحة يساعدك كمتقدم فقط، بدون أي خيارات إدارية.</p>
+          <div class="hero-actions">
+            <a class="btn primary" href="#publicJobsSection">استعراض الشواغر</a>
+            <button class="btn secondary" id="openVisitorAiBtn" type="button">اسأل مساعد المتقدمين</button>
+          </div>
+        </div>
+        <div class="public-hero-card">
+          <span>Open Vacancies</span>
+          <strong id="publicOpenCount">0</strong>
+          <small>شواغر منشورة ومتاحة للتقديم الآن</small>
+        </div>
+      </section>
+
+      <section class="public-section reveal" id="publicJobsSection">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Published Opportunities</p>
+            <h2>الشواغر المتاحة</h2>
+            <p>هذه هي الوظائف المنشورة حالياً من إدارة التوظيف.</p>
+          </div>
+        </div>
+        <div class="portal-jobs" id="publicJobs"></div>
+      </section>
+
+      <section class="public-section public-steps reveal" id="publicHowItWorks">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Candidate Journey</p>
+            <h2>طريقة التقديم</h2>
+            <p>رحلة مختصرة وواضحة للمتقدمين.</p>
+          </div>
+        </div>
+        <div class="steps-grid">
+          <article><span>01</span><h3>اختر الشاغر</h3><p>راجع المسمى والموقع والمتطلبات قبل التقديم.</p></article>
+          <article><span>02</span><h3>عبّئ الطلب</h3><p>أدخل بياناتك الأساسية، خبرتك، مهاراتك، وارفع السيرة الذاتية.</p></article>
+          <article><span>03</span><h3>أرسل الطلب</h3><p>يتم حفظ طلبك داخل النظام ليتم مراجعته من فريق التوظيف.</p></article>
+        </div>
+      </section>
+    </main>
+  </section>
+
+  <div class="app-shell" id="appShell">
+    <aside class="sidebar" aria-label="القائمة الرئيسية">
+      <div class="brand-block">
+        <div class="brand-mark" aria-hidden="true">H</div>
+        <div>
+          <strong>Hirova</strong>
+          <span>Talent Intelligence OS</span>
+        </div>
+      </div>
+
+      <nav class="side-nav">
+        <button class="nav-item active" data-view="dashboard"><span class="ico">⌁</span>لوحة القيادة</button>
+        <button class="nav-item" data-view="requisitions"><span class="ico">✦</span>طلبات الشواغر</button>
+        <button class="nav-item" data-view="jobs"><span class="ico">◈</span>الشواغر المنشورة</button>
+        <button class="nav-item" data-view="candidates"><span class="ico">◎</span>المرشحون</button>
+        <button class="nav-item" data-view="pipeline"><span class="ico">▣</span>Pipeline</button>
+        <button class="nav-item" data-view="ai"><span class="ico">✧</span>مركز الذكاء</button>
+        <button class="nav-item" data-view="portal"><span class="ico">↗</span>بوابة التقديم</button>
+        <button class="nav-item" data-view="settings"><span class="ico">⚙</span>الإعدادات</button>
+      </nav>
+
+      <div class="side-card">
+        <span class="tiny-label">النظام</span>
+        <h3>Owner Workspace</h3>
+        <p>لوحة تحكم خاصة بصاحب الموقع لإدارة الشواغر والمرشحين والذكاء الداخلي.</p>
+      </div>
+    </aside>
+
+    <main class="workspace">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Recruitment Control Center</p>
+          <h1 id="pageTitle">لوحة القيادة</h1>
+        </div>
+        <div class="top-actions">
+          <button class="btn ghost" id="themeToggle">وضع هادئ</button>
+          <button class="btn ghost" id="backupBtn">تصدير نسخة</button>
+          <button class="btn ghost" id="logoutBtn" type="button">خروج الإدارة</button>
+          <button class="btn primary" data-open="jobModal">+ شاغر جديد</button>
+        </div>
+      </header>
+
+      <section class="view active" id="dashboardView" data-title="لوحة القيادة">
+        <div class="hero-panel reveal">
+          <div class="hero-copy">
+            <span class="chip gold">Hirova Executive Hiring Suite</span>
+            <h2>من طلب الشاغر إلى قرار التعيين ضمن نظام واحد واضح وذكي.</h2>
+            <p>تحكم بالطلبات، انشر الإعلانات، استقبل المرشحين، قيّم الملاءمة، وتابع خط التوظيف بتصميم Light فاخر وسهل الاستخدام.</p>
+            <div class="hero-actions">
+              <button class="btn primary" data-open="jobModal">إنشاء طلب شاغر</button>
+              <button class="btn secondary" data-view-go="ai">افتح مركز الذكاء</button>
+            </div>
+          </div>
+          <div class="hero-visual" aria-label="مؤشرات النظام">
+            <div class="orbit-card main-kpi">
+              <span>Talent Health</span>
+              <strong id="talentHealth">92%</strong>
+              <small>مؤشر افتراضي مبني على سرعة الشواغر وحالة المرشحين</small>
+            </div>
+            <div class="spark-line" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          </div>
+        </div>
+
+        <div class="kpi-grid reveal" id="kpiGrid"></div>
+
+        <div class="dashboard-grid reveal">
+          <article class="panel wide">
+            <div class="panel-head">
+              <div>
+                <p class="eyebrow">Live Hiring Funnel</p>
+                <h3>قمع التوظيف</h3>
+              </div>
+              <button class="btn mini" id="seedDemoBtn">بيانات تجريبية</button>
+            </div>
+            <div class="funnel" id="funnelChart"></div>
+          </article>
+          <article class="panel">
+            <div class="panel-head">
+              <div>
+                <p class="eyebrow">Smart Alerts</p>
+                <h3>تنبيهات ذكية</h3>
+              </div>
+            </div>
+            <div class="smart-list" id="smartAlerts"></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="view" id="requisitionsView" data-title="طلبات الشواغر">
+        <div class="section-head reveal">
+          <div>
+            <p class="eyebrow">Workforce Demand</p>
+            <h2>طلبات الشواغر</h2>
+            <p>أنشئ الشاغر كطلب داخلي، ثم حوّله لإعلان منشور بضغطة واحدة.</p>
+          </div>
+          <button class="btn primary" data-open="jobModal">+ طلب شاغر</button>
+        </div>
+        <div class="toolbar reveal">
+          <input id="reqSearch" class="input" placeholder="بحث بالمسمى، القسم، الموقع..." />
+          <select id="reqStatusFilter" class="input"><option value="all">كل الحالات</option><option value="draft">مسودة</option><option value="published">منشور</option><option value="paused">موقوف</option><option value="closed">مغلق</option></select>
+        </div>
+        <div class="cards-grid reveal" id="requisitionsList"></div>
+      </section>
+
+      <section class="view" id="jobsView" data-title="الشواغر المنشورة">
+        <div class="section-head reveal">
+          <div>
+            <p class="eyebrow">Published Careers</p>
+            <h2>الشواغر المنشورة</h2>
+            <p>الإعلانات الفعالة الظاهرة في بوابة التقديم.</p>
+          </div>
+        </div>
+        <div class="cards-grid reveal" id="jobsList"></div>
+      </section>
+
+      <section class="view" id="candidatesView" data-title="المرشحون">
+        <div class="section-head reveal">
+          <div>
+            <p class="eyebrow">Applicant Intelligence</p>
+            <h2>المرشحون</h2>
+            <p>فلترة، تقييم ذكي، تغيير المرحلة، وتصدير البيانات.</p>
+          </div>
+          <div class="inline-actions">
+            <button class="btn secondary" id="exportCandidatesBtn">تصدير CSV</button>
+            <button class="btn primary" data-open="candidateModal">+ إضافة مرشح</button>
+          </div>
+        </div>
+        <div class="toolbar reveal">
+          <input id="candidateSearch" class="input" placeholder="بحث بالاسم، الشاغر، الهاتف، المهارة..." />
+          <select id="candidateStageFilter" class="input"></select>
+          <select id="candidateJobFilter" class="input"></select>
+        </div>
+        <div class="table-wrap reveal">
+          <table class="data-table">
+            <thead><tr><th>المرشح</th><th>الشاغر</th><th>الخبرة</th><th>المرحلة</th><th>الملاءمة</th><th>إجراءات</th></tr></thead>
+            <tbody id="candidatesTable"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="view" id="pipelineView" data-title="Pipeline">
+        <div class="section-head reveal">
+          <div>
+            <p class="eyebrow">Drag & Drop Board</p>
+            <h2>لوحة متابعة المرشحين</h2>
+            <p>اسحب المرشح بين المراحل لتحديث حالته فوراً.</p>
+          </div>
+        </div>
+        <div class="kanban reveal" id="kanbanBoard"></div>
+      </section>
+
+      <section class="view" id="aiView" data-title="مركز الذكاء">
+        <div class="section-head reveal">
+          <div>
+            <p class="eyebrow">Local Smart Engine</p>
+            <h2>مركز الذكاء في التوظيف</h2>
+            <p>ذكاء داخلي يعمل بدون API: توليد إعلان، أسئلة مقابلة، تحليل ملاءمة، وتنبيهات.</p>
+          </div>
+        </div>
+        <div class="ai-grid reveal">
+          <article class="panel ai-tool">
+            <h3>مولّد إعلان وظيفي</h3>
+            <p>اختر شاغراً وسنكتب إعلاناً احترافياً قابلاً للنشر.</p>
+            <select id="aiJobSelect" class="input"></select>
+            <button class="btn primary full" id="generateAdBtn">توليد الإعلان</button>
+            <textarea id="aiAdOutput" class="textarea tall" placeholder="سيظهر الإعلان هنا..."></textarea>
+          </article>
+          <article class="panel ai-tool">
+            <h3>تحليل مرشح</h3>
+            <p>اختر مرشحاً لتحليل الملاءمة ونقاط القوة والمخاطر.</p>
+            <select id="aiCandidateSelect" class="input"></select>
+            <button class="btn primary full" id="analyzeCandidateBtn">تحليل ذكي</button>
+            <div id="candidateAnalysis" class="analysis-box"></div>
+          </article>
+          <article class="panel ai-tool chat-panel">
+            <h3>مساعد التوظيف</h3>
+            <div class="chat-log" id="chatLog"></div>
+            <div class="chat-input">
+              <input id="assistantInput" class="input" placeholder="اسأل: شو أولوياتي اليوم؟ مين أفضل مرشح؟" />
+              <button class="btn primary" id="askAssistantBtn">إرسال</button>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="view" id="portalView" data-title="بوابة التقديم">
+        <div class="portal-shell reveal">
+          <div class="portal-hero">
+            <span class="chip gold">Careers Portal</span>
+            <h2>انضم إلى فريقنا</h2>
+            <p>استعرض الشواغر المتاحة وقدم طلبك خلال أقل من دقيقة.</p>
+          </div>
+          <div class="portal-jobs" id="portalJobs"></div>
+        </div>
+      </section>
+
+      <section class="view" id="settingsView" data-title="الإعدادات">
+        <div class="settings-grid reveal">
+          <article class="panel">
+            <h3>هوية النظام</h3>
+            <label>اسم الشركة<input id="companyName" class="input" /></label>
+            <label>كلمة مرور الإدارة<input id="adminPassword" class="input" type="password" placeholder="اكتب كلمة مرور جديدة أو اتركها كما هي" autocomplete="new-password" /></label>
+            <button class="btn primary" id="saveSettingsBtn">حفظ الإعدادات</button>
+          </article>
+          <article class="panel">
+            <h3>النسخ الاحتياطي</h3>
+            <p>صدّر كل بيانات الشواغر والمرشحين كملف JSON، أو استورد نسخة سابقة.</p>
+            <div class="inline-actions wrap">
+              <button class="btn secondary" id="exportJsonBtn">تصدير JSON</button>
+              <label class="btn ghost file-btn">استيراد JSON<input type="file" id="importJsonInput" accept="application/json" hidden /></label>
+              <button class="btn danger" id="resetDataBtn">مسح البيانات</button>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div class="modal-backdrop" id="modalBackdrop" aria-hidden="true"></div>
+
+  <dialog class="modal" id="loginModal">
+    <form method="dialog" class="modal-card small">
+      <button class="modal-close" value="cancel">×</button>
+      <span class="chip">Admin Access</span>
+      <h2>دخول الإدارة</h2>
+      <p>أدخل كلمة المرور لفتح لوحة التحكم.</p>
+      <input id="loginPassword" class="input" type="password" placeholder="كلمة المرور" />
+      <button class="btn primary full" id="loginBtn" value="default">دخول</button>
+    </form>
+  </dialog>
+
+  <dialog class="modal" id="jobModal">
+    <form method="dialog" class="modal-card large" id="jobForm">
+      <button class="modal-close" value="cancel">×</button>
+      <span class="chip gold">Vacancy Studio</span>
+      <h2>تحرير طلب شاغر</h2>
+      <input type="hidden" id="jobId" />
+      <div class="form-grid">
+        <label>المسمى الوظيفي<input id="jobTitle" class="input" required placeholder="مثال: مشرف مبيعات" /></label>
+        <label>القسم<input id="jobDept" class="input" required placeholder="المبيعات" /></label>
+        <label>الموقع<input id="jobLocation" class="input" required placeholder="دمشق / الساحل" /></label>
+        <label>نوع الدوام<select id="jobType" class="input"><option>دوام كامل</option><option>دوام جزئي</option><option>مؤقت</option><option>تدريب</option></select></label>
+        <label>المستوى<select id="jobLevel" class="input"><option>تشغيلي</option><option>إداري مكتبي</option><option>إشرافي</option><option>إداري قيادي</option><option>تنفيذي</option></select></label>
+        <label>آخر موعد للتقديم<input id="jobDeadline" class="input" type="date" /></label>
+      </div>
+      <label>ملخص الشاغر<textarea id="jobSummary" class="textarea" placeholder="اكتب نبذة مختصرة عن الغرض من الوظيفة..."></textarea></label>
+      <label>المهام الرئيسية<textarea id="jobDuties" class="textarea" placeholder="اكتب كل مهمة بسطر مستقل..."></textarea></label>
+      <label>المؤهلات والمتطلبات<textarea id="jobReqs" class="textarea" placeholder="اكتب كل متطلب بسطر مستقل..."></textarea></label>
+      <label>الكلمات المفتاحية للفرز الذكي<input id="jobKeywords" class="input" placeholder="مبيعات، قيادة فريق، تقارير، Excel" /></label>
+      <div class="modal-actions">
+        <button class="btn ghost" type="button" id="clearJobBtn">تفريغ</button>
+        <button class="btn secondary" type="button" id="saveDraftBtn">حفظ مسودة</button>
+        <button class="btn primary" type="button" id="publishJobBtn">تشغيل الإعلان</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog class="modal" id="candidateModal">
+    <form method="dialog" class="modal-card large" id="candidateForm">
+      <button class="modal-close" value="cancel">×</button>
+      <span class="chip gold">Applicant Intake</span>
+      <h2 id="candidateModalTitle">تقديم على شاغر</h2>
+      <input type="hidden" id="candidateId" />
+      <div class="form-grid">
+        <label>الشاغر<select id="candidateJob" class="input" required></select></label>
+        <label>الاسم الكامل<input id="candidateName" class="input" required /></label>
+        <label>رقم الهاتف<input id="candidatePhone" class="input" /></label>
+        <label>البريد الإلكتروني<input id="candidateEmail" class="input" /></label>
+        <label>المدينة<input id="candidateCity" class="input" /></label>
+        <label>سنوات الخبرة<input id="candidateExp" class="input" type="number" min="0" step="1" /></label>
+      </div>
+      <label>المهارات<input id="candidateSkills" class="input" placeholder="Excel, Sales, Reporting, Leadership" /></label>
+      <label>ملخص الخبرة<textarea id="candidateSummary" class="textarea" placeholder="انسخ ملخص السيرة أو اكتب نبذة عن خبرة المرشح..."></textarea></label>
+      <label class="admin-only-field">ملاحظات HR<textarea id="candidateNotes" class="textarea"></textarea></label>
+      <label>ملف السيرة الذاتية<input id="candidateCv" class="input" type="file" accept=".pdf,.doc,.docx" /></label>
+      <div class="modal-actions">
+        <button class="btn ghost admin-only-action" type="button" id="parseCandidateBtn">استخراج من النص</button>
+        <button class="btn secondary admin-only-action" type="button" id="scoreCandidateBtn">حساب الملاءمة</button>
+        <button class="btn primary" type="button" id="saveCandidateBtn">حفظ المرشح</button>
+      </div>
+    </form>
+  </dialog>
+
+
+  <div class="floating-ai" id="floatingAi">
+    <button class="ai-fab" id="aiFab" type="button" aria-label="فتح مساعد Hirova الذكي">
+      <span class="ai-orb">AI</span>
+      <span class="ai-pulse"></span>
+    </button>
+    <section class="ai-dock" id="aiDock" aria-live="polite">
+      <div class="ai-dock-head">
+        <div>
+          <strong id="floatingAiTitle">مساعد المتقدمين</strong>
+          <small id="floatingAiSub">إرشاد للزوار والمتقدمين فقط</small>
+        </div>
+        <button id="closeAiDock" type="button">×</button>
+      </div>
+      <div class="ai-quick" id="floatingAiQuick"></div>
+      <div class="ai-dock-log" id="floatingAiLog"></div>
+      <div class="ai-dock-input">
+        <input id="floatingAiInput" class="input" placeholder="اكتب سؤالك هنا..." />
+        <button class="btn primary" id="floatingAiSend" type="button">إرسال</button>
+      </div>
+    </section>
+  </div>
+
+  <toast-stack id="toastStack"></toast-stack>
+  <script src="app.js"></script>
+</body>
+</html>
